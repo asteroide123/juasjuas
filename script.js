@@ -91,7 +91,7 @@ function animateStars() {
 }
 animateStars();
 
-// ==== Diapositivas ====
+// ==== Diapositivas automáticas ====
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 
@@ -102,15 +102,18 @@ function showSlide(index) {
   });
 }
 
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
+// Pasar automáticamente cada 5 segundos
+function autoSlides() {
+  if (currentSlide < slides.length - 1) {
+    currentSlide++;
+    showSlide(currentSlide);
+    setTimeout(autoSlides, 5000); // cambia cada 5s
+  }
 }
 
-function prevSlide() {
-  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-  showSlide(currentSlide);
-}
+// Iniciar presentación
+showSlide(currentSlide);
+setTimeout(autoSlides, 5000);
 
 // Botón final
 function cambiarBoton() {
